@@ -28,6 +28,10 @@ impl Guess {
     }
 }
 
+fn internal_adder(a: i32, b: i32) -> i32 {
+    a + b
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -63,6 +67,7 @@ mod tests {
 
     // =============================================================================================
     #[test]
+    #[ignore]
     fn it_adds_two() {
         assert_eq!(4, add_two(2));
         assert_ne!(4, add_two(2));
@@ -75,14 +80,31 @@ mod tests {
     }
 
     #[test]
+    #[ignore]
     fn another() {
         panic!("Make this test fail");
     }
 
     // =============================================================================================
     #[test]
-    #[should_panic]
+    #[should_panic(expected = "Guess value must be lalala")]
+    #[ignore]
     fn greater_than_100() {
-        Guess::new(50);
+        Guess::new(200);
+    }
+
+    // =============================================================================================
+    #[test]
+    fn it_works() -> Result<(), String> {
+        if 2 + 2 == 4 {
+            Ok(())
+        } else {
+            Err(String::from("two plus two does not equal four"))
+        }
+    }
+
+    #[test]
+    fn test_internal() {
+        assert_eq!(4, internal_adder(2, 2))
     }
 }
